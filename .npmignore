@@ -1,7 +1,6 @@
 src
 playground
 .changeset
-biome.json
 tsup.config.ts
 tsconfig.json
 vitest.config.ts
