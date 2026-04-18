@@ -13,6 +13,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed `useRenderLens` → `useRenderTrace`; exported types `RenderLensRef` → `RenderTraceRef`, `RenderLensMetric` → `RenderTraceMetric`, `UseRenderLensOptions` → `UseRenderTraceOptions`
 - Renamed DOM data attributes `data-renderlens-*` → `data-rendertrace-*`
 
+## [0.2.0] - 2026-04-18
+
+### Changed
+
+- Package renamed from `renderlens` to `rendertrace` (the `renderlens` name was unavailable on npm)
+- `useRenderLens` hook renamed to `useRenderTrace`; exported types `RenderLensRef`, `RenderLensMetric`, and `UseRenderLensOptions` renamed to `RenderTraceRef`, `RenderTraceMetric`, and `UseRenderTraceOptions` respectively
+- DOM data attributes `data-renderlens-*` renamed to `data-rendertrace-*`
+
 ## [0.1.0] - 2026-04-18
 
 ### Added
