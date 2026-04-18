@@ -1,6 +1,6 @@
 {
   "name": "rendertrace",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Visualize React component render counts with a small overlay pill. A dev-only trace for optimizing re-renders.",
   "keywords": [
     "react",

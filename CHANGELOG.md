@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed `useRenderLens` → `useRenderTrace`; exported types `RenderLensRef` → `RenderTraceRef`, `RenderLensMetric` → `RenderTraceMetric`, `UseRenderLensOptions` → `UseRenderTraceOptions`
 - Renamed DOM data attributes `data-renderlens-*` → `data-rendertrace-*`
 
+## [0.2.1] - 2026-04-18
+
+There are no user-facing changes in this release. All modifications are internal tooling (removal of Biome formatter/linter configuration and its dependencies).
+
 ## [0.2.0] - 2026-04-18
 
 ### Changed
