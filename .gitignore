@@ -1,0 +1,11 @@
+node_modules
+dist
+.DS_Store
+*.log
+coverage
+.vite
+playground/dist
+
+# releasewise
+.releasewise.local.json
+.releasewise/
