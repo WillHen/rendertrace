@@ -1,7 +1,7 @@
 {
-  "name": "renderlens",
+  "name": "rendertrace",
   "version": "0.1.0",
-  "description": "Visualize React component render counts with a small overlay pill. A dev-only lens for optimizing re-renders.",
+  "description": "Visualize React component render counts with a small overlay pill. A dev-only trace for optimizing re-renders.",
   "keywords": [
     "react",
     "devtools",
@@ -11,6 +11,14 @@
     "optimization"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WillHen/rendertrace.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WillHen/rendertrace/issues"
+  },
+  "homepage": "https://github.com/WillHen/rendertrace#readme",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -39,7 +47,7 @@
     "lint:eslint": "eslint . --max-warnings=0",
     "format:check": "biome format .",
     "format": "biome format --write .",
-    "playground": "pnpm --filter renderlens-playground dev",
+    "playground": "pnpm --filter rendertrace-playground dev",
     "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {

@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      renderlens: resolve(__dirname, "../src/index.ts"),
+      rendertrace: resolve(__dirname, "../src/index.ts"),
     },
   },
 });

@@ -3,22 +3,22 @@ import type { ReactElement } from "react";
 import { type Root, createRoot } from "react-dom/client";
 import { Overlay } from "./Overlay";
 
-export type LensMetric = "renders" | "commits";
+export type TraceMetric = "renders" | "commits";
 
-export interface LensEntry {
+export interface TraceEntry {
   label: string;
-  metric: LensMetric;
+  metric: TraceMetric;
   count: number;
   target: HTMLElement | null;
 }
 
-const entries = new Map<number, LensEntry>();
+const entries = new Map<number, TraceEntry>();
 const listeners = new Set<() => void>();
 let nextId = 1;
 let version = 0;
 let root: Root | null = null;
 
-const LAYER_ATTR = "data-renderlens-layer";
+const LAYER_ATTR = "data-rendertrace-layer";
 
 function emit(): void {
   version += 1;
@@ -49,7 +49,7 @@ function getVersion(): number {
   return version;
 }
 
-export function registerLens(): number {
+export function register(): number {
   const id = nextId;
   nextId += 1;
   entries.set(id, {
@@ -62,7 +62,7 @@ export function registerLens(): number {
   return id;
 }
 
-export function updateLens(id: number, entry: LensEntry): void {
+export function update(id: number, entry: TraceEntry): void {
   const current = entries.get(id);
   if (
     current &&
@@ -77,11 +77,11 @@ export function updateLens(id: number, entry: LensEntry): void {
   emit();
 }
 
-export function unregisterLens(id: number): void {
+export function unregister(id: number): void {
   if (entries.delete(id)) emit();
 }
 
-export function getEntries(): ReadonlyMap<number, LensEntry> {
+export function getEntries(): ReadonlyMap<number, TraceEntry> {
   return entries;
 }
 
@@ -131,10 +131,10 @@ export function __resetLayerForTests(): void {
   nextId = 1;
   version = 0;
   if (typeof document !== "undefined") {
-    for (const node of document.querySelectorAll("[data-renderlens-layer]")) {
+    for (const node of document.querySelectorAll("[data-rendertrace-layer]")) {
       node.remove();
     }
-    for (const node of document.querySelectorAll("[data-renderlens-root]")) {
+    for (const node of document.querySelectorAll("[data-rendertrace-root]")) {
       node.remove();
     }
   }

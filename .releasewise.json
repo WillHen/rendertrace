@@ -1,5 +1,5 @@
 {
-  "projectName": "renderlens",
+  "projectName": "rendertrace",
   "commitMode": "mixed",
   "ai": {
     "provider": "anthropic",

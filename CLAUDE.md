@@ -1,6 +1,6 @@
-# RenderLens — contributor notes for Claude
+# RenderTrace — contributor notes for Claude
 
-RenderLens is a publishable React devtool package. The root directory *is* the
+RenderTrace is a publishable React devtool package. The root directory *is* the
 publishable package; `playground/` is a local Vite demo, not published.
 
 ## Commits
@@ -38,7 +38,7 @@ Never run `npm publish` without explicit user confirmation. Before publish:
 
 ## Architecture quick-reference
 
-- `src/useRenderLens.ts` — public hook. Returns a callback ref.
+- `src/useRenderTrace.ts` — public hook. Returns a callback ref.
 - `src/Overlay.tsx` — pill component, portaled to `document.body`.
 - `src/layer.tsx` — detached React root + module-level entry store.
 - `src/isProduction.ts` — `NODE_ENV === "production"` check.

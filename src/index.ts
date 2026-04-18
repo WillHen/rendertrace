@@ -1,6 +1,6 @@
-export { useRenderLens } from "./useRenderLens";
+export { useRenderTrace } from "./useRenderTrace";
 export type {
-  RenderLensMetric,
-  RenderLensRef,
-  UseRenderLensOptions,
-} from "./useRenderLens";
+  RenderTraceMetric,
+  RenderTraceRef,
+  UseRenderTraceOptions,
+} from "./useRenderTrace";

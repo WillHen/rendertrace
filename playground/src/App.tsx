@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useRenderLens } from "renderlens";
+import { useRenderTrace } from "rendertrace";
 
 const card: React.CSSProperties = {
   background: "white",
@@ -10,7 +10,7 @@ const card: React.CSSProperties = {
 };
 
 function Header({ title }: { title: string }) {
-  const ref = useRenderLens("Header");
+  const ref = useRenderTrace("Header");
   return (
     <header ref={ref} style={{ ...card, fontSize: 22, fontWeight: 600 }}>
       {title}
@@ -19,7 +19,7 @@ function Header({ title }: { title: string }) {
 }
 
 function Counter() {
-  const ref = useRenderLens("Counter");
+  const ref = useRenderTrace("Counter");
   const [n, setN] = useState(0);
   return (
     <section ref={ref} style={card}>
@@ -36,7 +36,7 @@ function Counter() {
 }
 
 function Row({ i, tick }: { i: number; tick: number }) {
-  const ref = useRenderLens(`Row[${i}]`);
+  const ref = useRenderTrace(`Row[${i}]`);
   return (
     <li
       ref={ref}
@@ -52,7 +52,7 @@ function Row({ i, tick }: { i: number; tick: number }) {
 }
 
 function List() {
-  const ref = useRenderLens("List");
+  const ref = useRenderTrace("List");
   const [tick, setTick] = useState(0);
   return (
     <section ref={ref} style={card}>
@@ -77,7 +77,7 @@ function List() {
 export function App() {
   return (
     <main style={{ maxWidth: 640, margin: "0 auto" }}>
-      <Header title="RenderLens playground" />
+      <Header title="RenderTrace playground" />
       <Counter />
       <List />
     </main>

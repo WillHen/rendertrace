@@ -1,4 +1,4 @@
-# RenderLens
+# RenderTrace
 
 A tiny React devtool that pins a render-count pill to any component you annotate.
 Drop in a hook, get a live visual counter of how many times that component has
@@ -14,8 +14,8 @@ rendered. Meant for hunting down wasted re-renders during development.
 ## Install
 
 ```bash
-npm install renderlens
-# or: pnpm add renderlens / yarn add renderlens
+npm install rendertrace
+# or: pnpm add rendertrace / yarn add rendertrace
 ```
 
 Peer deps: `react >= 18`, `react-dom >= 18`.
@@ -23,28 +23,28 @@ Peer deps: `react >= 18`, `react-dom >= 18`.
 ## Quick start
 
 ```tsx
-import { useRenderLens } from "renderlens";
+import { useRenderTrace } from "rendertrace";
 
 function Header({ title }: { title: string }) {
-  const ref = useRenderLens("Header");
+  const ref = useRenderTrace("Header");
   return <header ref={ref}>{title}</header>;
 }
 ```
 
 That's it. Every time `Header` renders, the pill updates. Attach the returned
-ref to the DOM node you want the pill anchored to — RenderLens positions itself
+ref to the DOM node you want the pill anchored to — RenderTrace positions itself
 in the top-right corner of that element. The pill shows `Header · 3r` — the
 `r` suffix means it's counting **renders** (React invocations of your
 component function).
 
 ### Renders vs. commits
 
-By default RenderLens counts **renders** (how many times React called your
+By default RenderTrace counts **renders** (how many times React called your
 component function). Pass `metric: 'commits'` to count **commits** instead
 (how many times React actually applied a DOM update for this component):
 
 ```tsx
-const ref = useRenderLens("Header", { metric: "commits" });
+const ref = useRenderTrace("Header", { metric: "commits" });
 // pill shows "Header · 3c"
 ```
 
@@ -63,14 +63,14 @@ didn't commit.
 
 When `process.env.NODE_ENV === "production"`, the hook is a no-op: it returns a
 ref callback that does nothing and mounts no DOM. Your bundler can tree-shake
-the overlay code away, so shipping RenderLens calls to production is safe by
+the overlay code away, so shipping RenderTrace calls to production is safe by
 default.
 
 If you want to force-disable it in development too, simply don't call the hook.
 
 ## Roadmap
 
-RenderLens is intentionally small. Near-term features being designed:
+RenderTrace is intentionally small. Near-term features being designed:
 
 - **Props diff** — show which props changed between renders, inline in the pill
   tooltip.
@@ -88,8 +88,8 @@ A local playground lives in `playground/`:
 
 ```bash
 pnpm install
-pnpm --filter renderlens-playground install
-pnpm --filter renderlens-playground dev
+pnpm --filter rendertrace-playground install
+pnpm --filter rendertrace-playground dev
 ```
 
 ## Caveats

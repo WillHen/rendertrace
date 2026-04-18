@@ -2,7 +2,7 @@ import { act, fireEvent, render, screen } from "@testing-library/react";
 import { useState } from "react";
 import { afterEach, describe, expect, it } from "vitest";
 import { __resetLayerForTests, getEntries } from "../layer";
-import { type UseRenderLensOptions, useRenderLens } from "../useRenderLens";
+import { type UseRenderTraceOptions, useRenderTrace } from "../useRenderTrace";
 
 afterEach(() => {
   __resetLayerForTests();
@@ -20,9 +20,9 @@ function Tracked({
   options,
 }: {
   label?: string;
-  options?: UseRenderLensOptions;
+  options?: UseRenderTraceOptions;
 }) {
-  const ref = useRenderLens(label, options);
+  const ref = useRenderTrace(label, options);
   const [n, setN] = useState(0);
   return (
     <div ref={ref} data-testid="tracked">
@@ -33,7 +33,7 @@ function Tracked({
   );
 }
 
-describe("useRenderLens", () => {
+describe("useRenderTrace", () => {
   it("defaults to the renders metric", () => {
     render(<Tracked />);
     const entry = findEntry("X");
@@ -77,7 +77,7 @@ describe("useRenderLens", () => {
   it("returns a stable ref callback across renders", () => {
     const seen = new Set<unknown>();
     function Inspector() {
-      const ref = useRenderLens("Inspector");
+      const ref = useRenderTrace("Inspector");
       seen.add(ref);
       const [n, setN] = useState(0);
       return (

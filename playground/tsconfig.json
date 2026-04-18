@@ -13,7 +13,7 @@
     "allowImportingTsExtensions": false,
     "noEmit": true,
     "paths": {
-      "renderlens": ["../src/index.ts"]
+      "rendertrace": ["../src/index.ts"]
     }
   },
   "include": ["src", "vite.config.ts"]

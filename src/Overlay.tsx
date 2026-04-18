@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import type { LensMetric } from "./layer";
+import type { TraceMetric } from "./layer";
 
 interface OverlayProps {
   label: string;
-  metric: LensMetric;
+  metric: TraceMetric;
   count: number;
   target: HTMLElement | null;
 }
@@ -15,7 +15,7 @@ interface Rect {
   width: number;
 }
 
-const PORTAL_ATTR = "data-renderlens-root";
+const PORTAL_ATTR = "data-rendertrace-root";
 
 function getPortalRoot(): HTMLElement | null {
   if (typeof document === "undefined") return null;
@@ -84,7 +84,7 @@ export function Overlay({ label, metric, count, target }: OverlayProps) {
   };
 
   return createPortal(
-    <div data-renderlens-pill={label} style={style}>
+    <div data-rendertrace-pill={label} style={style}>
       {label} · {count}
       {metric === "commits" ? "c" : "r"}
     </div>,

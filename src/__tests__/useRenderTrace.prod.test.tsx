@@ -5,16 +5,16 @@ vi.mock("../isProduction", () => ({
   isProduction: () => true,
 }));
 
-const { useRenderLens } = await import("../useRenderLens");
+const { useRenderTrace } = await import("../useRenderTrace");
 
-describe("useRenderLens in production", () => {
+describe("useRenderTrace in production", () => {
   it("does not mount a pill or layer", () => {
     function C() {
-      const ref = useRenderLens("Label");
+      const ref = useRenderTrace("Label");
       return <div ref={ref}>hello</div>;
     }
     render(<C />);
-    expect(document.querySelector("[data-renderlens-pill]")).toBeNull();
-    expect(document.querySelector("[data-renderlens-layer]")).toBeNull();
+    expect(document.querySelector("[data-rendertrace-pill]")).toBeNull();
+    expect(document.querySelector("[data-rendertrace-layer]")).toBeNull();
   });
 });

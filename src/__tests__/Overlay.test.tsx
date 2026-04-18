@@ -30,9 +30,9 @@ describe("Overlay", () => {
     const target = makeTarget({ top: 100, left: 50, width: 200 });
     render(<Overlay label="Foo" metric="renders" count={3} target={target} />);
 
-    expect(document.querySelector("[data-renderlens-root]")).not.toBeNull();
+    expect(document.querySelector("[data-rendertrace-root]")).not.toBeNull();
     const pill = document.querySelector<HTMLElement>(
-      '[data-renderlens-pill="Foo"]',
+      '[data-rendertrace-pill="Foo"]',
     );
     expect(pill?.textContent).toBe("Foo · 3r");
   });
@@ -41,7 +41,7 @@ describe("Overlay", () => {
     const target = makeTarget({ top: 10, left: 10, width: 100 });
     render(<Overlay label="Bar" metric="commits" count={5} target={target} />);
     expect(
-      document.querySelector('[data-renderlens-pill="Bar"]')?.textContent,
+      document.querySelector('[data-rendertrace-pill="Bar"]')?.textContent,
     ).toBe("Bar · 5c");
   });
 
@@ -51,19 +51,19 @@ describe("Overlay", () => {
       <Overlay label="Baz" metric="renders" count={1} target={target} />,
     );
     expect(
-      document.querySelector('[data-renderlens-pill="Baz"]')?.textContent,
+      document.querySelector('[data-rendertrace-pill="Baz"]')?.textContent,
     ).toBe("Baz · 1r");
 
     rerender(
       <Overlay label="Baz" metric="renders" count={7} target={target} />,
     );
     expect(
-      document.querySelector('[data-renderlens-pill="Baz"]')?.textContent,
+      document.querySelector('[data-rendertrace-pill="Baz"]')?.textContent,
     ).toBe("Baz · 7r");
   });
 
   it("renders nothing when target is null", () => {
     render(<Overlay label="None" metric="renders" count={1} target={null} />);
-    expect(document.querySelector('[data-renderlens-pill="None"]')).toBeNull();
+    expect(document.querySelector('[data-rendertrace-pill="None"]')).toBeNull();
   });
 });

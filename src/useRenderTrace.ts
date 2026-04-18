@@ -1,22 +1,22 @@
 import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import { isProduction } from "./isProduction";
-import { getLayer, registerLens, unregisterLens, updateLens } from "./layer";
+import { getLayer, register, unregister, update } from "./layer";
 
 const IS_PROD = isProduction();
 const NOOP_REF = (): void => {};
 
-export type RenderLensRef = (element: HTMLElement | null) => void;
-export type RenderLensMetric = "renders" | "commits";
+export type RenderTraceRef = (element: HTMLElement | null) => void;
+export type RenderTraceMetric = "renders" | "commits";
 
-export interface UseRenderLensOptions {
-  metric?: RenderLensMetric;
+export interface UseRenderTraceOptions {
+  metric?: RenderTraceMetric;
 }
 
-export function useRenderLens(
+export function useRenderTrace(
   label: string,
-  options?: UseRenderLensOptions,
-): RenderLensRef {
-  const metric: RenderLensMetric = options?.metric ?? "renders";
+  options?: UseRenderTraceOptions,
+): RenderTraceRef {
+  const metric: RenderTraceMetric = options?.metric ?? "renders";
 
   const countRef = useRef(0);
   const idRef = useRef<number | null>(null);
@@ -28,7 +28,7 @@ export function useRenderLens(
     labelRef.current = label;
     metricRef.current = metric;
     if (idRef.current === null) {
-      idRef.current = registerLens();
+      idRef.current = register();
     }
     if (metric === "renders") {
       countRef.current += 1;
@@ -39,7 +39,7 @@ export function useRenderLens(
     if (IS_PROD) return;
     const id = idRef.current;
     if (id === null) return;
-    updateLens(id, {
+    update(id, {
       label,
       metric,
       count: countRef.current,
@@ -53,7 +53,7 @@ export function useRenderLens(
       countRef.current += 1;
       const id = idRef.current;
       if (id !== null) {
-        updateLens(id, {
+        update(id, {
           label: labelRef.current,
           metric: metricRef.current,
           count: countRef.current,
@@ -68,16 +68,16 @@ export function useRenderLens(
     getLayer();
     const id = idRef.current;
     return () => {
-      if (id !== null) unregisterLens(id);
+      if (id !== null) unregister(id);
     };
   }, []);
 
-  const setRef = useCallback<RenderLensRef>((element) => {
+  const setRef = useCallback<RenderTraceRef>((element) => {
     if (IS_PROD) return;
     targetRef.current = element;
     const id = idRef.current;
     if (id !== null) {
-      updateLens(id, {
+      update(id, {
         label: labelRef.current,
         metric: metricRef.current,
         count: countRef.current,
