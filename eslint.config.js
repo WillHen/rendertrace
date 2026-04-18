@@ -1,52 +1,52 @@
-import js from '@eslint/js';
-import reactHooks from 'eslint-plugin-react-hooks';
-import globals from 'globals';
-import tseslint from 'typescript-eslint';
+import js from "@eslint/js";
+import reactHooks from "eslint-plugin-react-hooks";
+import globals from "globals";
+import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   {
     ignores: [
-      'dist/**',
-      'node_modules/**',
-      'playground/dist/**',
-      'playground/node_modules/**'
-    ]
+      "dist/**",
+      "node_modules/**",
+      "playground/dist/**",
+      "playground/node_modules/**",
+    ],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    files: ['**/*.{ts,tsx,js,jsx}'],
+    files: ["**/*.{ts,tsx,js,jsx}"],
     languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
+      ecmaVersion: "latest",
+      sourceType: "module",
       globals: {
         ...globals.browser,
-        ...globals.node
+        ...globals.node,
       },
       parserOptions: {
         ecmaFeatures: {
-          jsx: true
-        }
-      }
-    }
+          jsx: true,
+        },
+      },
+    },
   },
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ["**/*.{ts,tsx}"],
     plugins: {
-      'react-hooks': reactHooks
+      "react-hooks": reactHooks,
     },
     rules: {
-      'react-hooks/exhaustive-deps': 'warn',
-      'react-hooks/rules-of-hooks': 'error'
-    }
+      "react-hooks/exhaustive-deps": "warn",
+      "react-hooks/rules-of-hooks": "error",
+    },
   },
   {
-    files: ['src/__tests__/**/*.{ts,tsx}', '**/*.test.{ts,tsx}'],
+    files: ["src/__tests__/**/*.{ts,tsx}", "**/*.test.{ts,tsx}"],
     languageOptions: {
       globals: {
         ...globals.browser,
-        ...globals.vitest
-      }
-    }
-  }
+        ...globals.vitest,
+      },
+    },
+  },
 );
