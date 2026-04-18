@@ -1,9 +1,9 @@
-import { act, useSyncExternalStore } from "react";
-import type { ReactElement } from "react";
-import { type Root, createRoot } from "react-dom/client";
-import { Overlay } from "./Overlay";
+import { act, useSyncExternalStore } from 'react';
+import type { ReactElement } from 'react';
+import { type Root, createRoot } from 'react-dom/client';
+import { Overlay } from './Overlay';
 
-export type LensMetric = "renders" | "commits";
+export type LensMetric = 'renders' | 'commits';
 
 export interface LensEntry {
   label: string;
@@ -18,7 +18,7 @@ let nextId = 1;
 let version = 0;
 let root: Root | null = null;
 
-const LAYER_ATTR = "data-renderlens-layer";
+const LAYER_ATTR = 'data-renderlens-layer';
 
 function emit(): void {
   version += 1;
@@ -26,7 +26,7 @@ function emit(): void {
     for (const listener of listeners) listener();
   };
   const inAct =
-    typeof globalThis !== "undefined" &&
+    typeof globalThis !== 'undefined' &&
     (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean })
       .IS_REACT_ACT_ENVIRONMENT === true;
   if (inAct) {
@@ -53,10 +53,10 @@ export function registerLens(): number {
   const id = nextId;
   nextId += 1;
   entries.set(id, {
-    label: "",
-    metric: "renders",
+    label: '',
+    metric: 'renders',
     count: 0,
-    target: null,
+    target: null
   });
   emit();
   return id;
@@ -97,24 +97,24 @@ function OverlayLayer(): ReactElement {
         metric={entry.metric}
         count={entry.count}
         target={entry.target}
-      />,
+      />
     );
   }
   return <>{rendered}</>;
 }
 
 export function getLayer(): void {
-  if (typeof document === "undefined") return;
+  if (typeof document === 'undefined') return;
   if (root) return;
   const inAct =
-    typeof globalThis !== "undefined" &&
+    typeof globalThis !== 'undefined' &&
     (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean })
       .IS_REACT_ACT_ENVIRONMENT === true;
   if (inAct) return;
   let host = document.querySelector<HTMLElement>(`[${LAYER_ATTR}]`);
   if (!host) {
-    host = document.createElement("div");
-    host.setAttribute(LAYER_ATTR, "");
+    host = document.createElement('div');
+    host.setAttribute(LAYER_ATTR, '');
     document.body.appendChild(host);
   }
   root = createRoot(host);
@@ -130,11 +130,11 @@ export function __resetLayerForTests(): void {
   listeners.clear();
   nextId = 1;
   version = 0;
-  if (typeof document !== "undefined") {
-    for (const node of document.querySelectorAll("[data-renderlens-layer]")) {
+  if (typeof document !== 'undefined') {
+    for (const node of document.querySelectorAll('[data-renderlens-layer]')) {
       node.remove();
     }
-    for (const node of document.querySelectorAll("[data-renderlens-root]")) {
+    for (const node of document.querySelectorAll('[data-renderlens-root]')) {
       node.remove();
     }
   }
