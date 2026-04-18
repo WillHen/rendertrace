@@ -64,8 +64,6 @@ describe("Overlay", () => {
 
   it("renders nothing when target is null", () => {
     render(<Overlay label="None" metric="renders" count={1} target={null} />);
-    expect(
-      document.querySelector('[data-renderlens-pill="None"]'),
-    ).toBeNull();
+    expect(document.querySelector('[data-renderlens-pill="None"]')).toBeNull();
   });
 });

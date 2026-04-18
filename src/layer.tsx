@@ -88,8 +88,8 @@ export function getEntries(): ReadonlyMap<number, LensEntry> {
 function OverlayLayer(): ReactElement {
   useSyncExternalStore(subscribe, getVersion, getVersion);
   const rendered: ReactElement[] = [];
-  entries.forEach((entry, id) => {
-    if (!entry.target) return;
+  for (const [id, entry] of entries) {
+    if (!entry.target) continue;
     rendered.push(
       <Overlay
         key={id}
@@ -99,7 +99,7 @@ function OverlayLayer(): ReactElement {
         target={entry.target}
       />,
     );
-  });
+  }
   return <>{rendered}</>;
 }
 
@@ -131,11 +131,11 @@ export function __resetLayerForTests(): void {
   nextId = 1;
   version = 0;
   if (typeof document !== "undefined") {
-    document
-      .querySelectorAll("[data-renderlens-layer]")
-      .forEach((n) => n.remove());
-    document
-      .querySelectorAll("[data-renderlens-root]")
-      .forEach((n) => n.remove());
+    for (const node of document.querySelectorAll("[data-renderlens-layer]")) {
+      node.remove();
+    }
+    for (const node of document.querySelectorAll("[data-renderlens-root]")) {
+      node.remove();
+    }
   }
 }

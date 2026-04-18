@@ -2,7 +2,7 @@ import { act, fireEvent, render, screen } from "@testing-library/react";
 import { useState } from "react";
 import { afterEach, describe, expect, it } from "vitest";
 import { __resetLayerForTests, getEntries } from "../layer";
-import { useRenderLens, type UseRenderLensOptions } from "../useRenderLens";
+import { type UseRenderLensOptions, useRenderLens } from "../useRenderLens";
 
 afterEach(() => {
   __resetLayerForTests();
